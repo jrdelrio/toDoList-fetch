@@ -1,12 +1,66 @@
+.container {
+    max-width: 50%;
+    margin-top: 100px;
+    text-align: center;
+}
 
-/* 
+h1 {
+    text-align: center;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+li {
+    border: 1px black solid;
+    padding: 5px;
+    list-style-type: none;
+    border-radius: 5px;
+    background-color: #d6ffc4;
+    text-align: left;
+}
 
-*/
+#input-field {
+    background-color: white;
+    padding: 5px
+}
+
+ul {
+    padding-left: 0;
+    margin-bottom: 0px;
+}
+
+input {
+    border: solid 2px green;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    max-width: 800px;
+
+}
+
+.total-tasks {
+    margin-top: 0px;
+}
+
+.bottom {
+    padding: 5px;
+    list-style-type: none;
+    display: block
+}
+
+.total-tasks {
+    text-align: left;
+}
+
+.clear {
+    text-align: right;
+}
+
+i {
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+    cursor: pointer
+}
+
+.clearAll {
+    font-weight: bold;
+}
