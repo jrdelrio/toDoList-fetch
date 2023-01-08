@@ -12,13 +12,52 @@ const Home = () => {
 	const [ url, setUrl ] = useState("https://assets.breatheco.de/apis/fake/todos/user/jrdelrio");
 
 	// aux functions
-	const setInputValueFunction = (arg) => {setInputValue(arg)};
-	const setToDosFunction = (arg) => {setToDos([...toDos, arg])};
-	const removeTask = (taskToRemove) => {
-		const filteredList = toDos.filter(task => task !== taskToRemove)
-		setToDos(filteredList)
-	}
+	const addTask = (taskObj) => {
 
+		// la agrego localmente
+		let aux = toDos;
+		aux.push(taskObj);
+		setToDos(aux);
+		
+		// fetch PUT		
+		fetch(url, {
+			method: 'PUT',
+			headers: {"Content-Type": "application/json"},
+			body: toDos,
+			redirect: 'follow'
+		  })
+		.then(response => response.text())
+		.then(result => console.log(result))
+		.catch(error => console.log('error', error));
+		setInputValue('')
+
+	};
+
+	const removeTask = (taskToTrue) => { 
+		let auxToDos = toDos;
+		for (let task of auxToDos){
+			if (task === taskToTrue){
+				task.done = true
+			}};
+		setToDos(auxToDos)
+										  
+		fetch(url, 
+		{
+			method: 'PUT',
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(toDos),
+			redirect: 'follow'
+		}
+		)
+		.then(response => response.text())
+		.then(data => console.log(data))
+		.catch(error => console.log('error', error));
+		fillToDoList()
+	};
+
+	const setInputValueFunction = (arg) => {setInputValue(arg)};
+
+	// fetch GET
 	function fillToDoList(url){
 		fetch(url)
 		.then((resp)=>resp.json())
@@ -31,9 +70,7 @@ const Home = () => {
 		const url = "https://assets.breatheco.de/apis/fake/todos/user/jrdelrio";
 		const options = {
 							method:'PUT',
-							headers:{
-										'Content-Type': 'application/json'
-									},
+							headers:{'Content-Type': 'application/json'},
 							body: JSON.stringify(toDos)
 						};
 
@@ -51,19 +88,14 @@ const Home = () => {
 	}, []);
 
 	if (toDos !== []){
-		console.log('imprimir toDos')
-		console.log(toDos)
-	}
-
-	if (toDos !== []){
 		return (
 				<div className="container">
 					<h1>To Do List</h1>
-					<Input value = {inputValue} 
-						setVar = {setInputValueFunction}
-						setToDos = {setToDosFunction}
+					<Input value = {inputValue}
+						setToDos = {addTask}
 						toDos = {toDos}
 						updateApiList = {updateApiList}
+						setVar = {setInputValueFunction}
 						/>
 
 					<ul>
