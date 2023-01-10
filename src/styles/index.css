@@ -64,3 +64,8 @@ i {
 .clearAll {
     font-weight: bold;
 }
+
+button{
+    border: none;
+    background-color: none
+}
