@@ -65,6 +65,7 @@ i {
     font-weight: bold;
 }
 
-.displayedTask:not(:hover) .fa-trash-can {
-    display: none
- }
+button{
+    border: none;
+    background-color: none
+}
